@@ -6,6 +6,7 @@ import os
 '..\\resoursces\\down.png'
 def start():
     st.session_state['randnum'] = random.randint(1, 100)
+
 def grn():
     if 'randnum' in st.session_state:
         return st.session_state['randnum']
@@ -15,8 +16,7 @@ def clse():
 def getImage(imagename):
     curruntPath = os.path.abspath(os.path.dirname(__file__))
     # st.write(curruntPath, imagename)
-    a =  os.path.join(curruntPath, '..', 'resources', imagename)
-    st.write(a)
+    a =os.path.join(curruntPath, '..', 'resources', imagename)
     return a
 def UpAndDown():
     st.title('×º°”˜`”°º× ᴜᴘ ᴀɴᴅ ᴅᴏᴡɴ ×º°”˜`”°º×')
@@ -25,23 +25,23 @@ def UpAndDown():
         start()
     computer = grn()
     if computer != None:
-        n_inp = st.number_input('숫자를 맞춰보세요(1~100)', 1, 100)
+        n_inp = st.number_input('숫자를 맞춰보세요(1~100)', 0, 100)
         app_but = st.button('정답')
-        if n_inp or app_but:
+        if (n_inp != 0) and (n_inp or app_but):
             if n_inp == computer:
                 st.write('Right')
                 imgpath = getImage('JeongDeop.png')
                 image = Image.open(imgpath)
-                getImage(image)
+                st.image(image)
                 time.sleep(2)
                 clse()
             elif n_inp > computer:
                 st.write('Down')
                 imgpath = getImage('Down.png')
                 image = Image.open(imgpath)
-                getImage(image)
+                st.image(image)
             else:
                 st.write('Up')
                 imgpath = getImage('Up.png')
                 image = Image.open(imgpath)
-                getImage(image)
+                st.image(image)
